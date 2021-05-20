@@ -114,7 +114,7 @@ export default {
         NoteInsert(InsertData,state) {
             if(state) InsertData.taskState = state; // state 存在更新值才更新
             InsertData.NoteTime = new Date().toLocaleString();
-            axios.post('http://116.63.152.202:3000/note/add', InsertData)
+            axios.post('/note/add', InsertData)
             .then(res => {
                 if(res.data == 'update') console.log('update');
                 else InsertData.id = parseInt(res.data);
@@ -134,7 +134,7 @@ export default {
                 if(this.NoteDeleteList[index] == true) return item;
             })
             console.log(list);
-            axios.post('http://116.63.152.202:3000/note/delete',list).catch(err => { console.log(err); });
+            axios.post('/note/delete',list).catch(err => { console.log(err); });
             this.NoteData = this.NoteData.filter((item,index) => {
                 if(this.NoteDeleteList[index] == false) return item; 
             })
@@ -142,7 +142,7 @@ export default {
             this.DeleteFlag = !this.DeleteFlag;
         },
         getData(){
-            axios.get('http://116.63.152.202:3000/note')
+            axios.get('/note')
             .then((res) => {
                 console.log(res.data);
                 this.isGet = true;
